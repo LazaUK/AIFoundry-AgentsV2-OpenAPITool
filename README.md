@@ -3,7 +3,8 @@ This repo demonstrates how to use an *OpenAPI-specified API* as a tool for an AI
 
 The provided Jupyter notebook, `Agent_OpenAPITool.ipynb`, shows the complete end-to-end setup: from testing the backend API to creating and interacting with the agent.
 
-> **Note:** The OpenAPI tool requires each operation to have an `operationId`. The API key is securely stored in an Azure project connection and passed automatically by the Agent Service.
+> [!Note]
+> The OpenAPI tool requires each operation to have an `operationId`. The API key is securely stored in an Azure project connection and passed automatically by the Agent Service.
 
 ## 📑 Table of Contents:
 - [Part 1: Configuring the Environment](#part-1-configuring-the-environment)
