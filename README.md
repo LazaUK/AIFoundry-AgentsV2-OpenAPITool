@@ -9,7 +9,7 @@ The provided Jupyter notebook, `Agent_OpenAPITool.ipynb`, shows the complete end
 ## 📑 Table of Contents:
 - [Part 1: Configuring the Environment](#part-1-configuring-the-environment)
 - [Part 2: Backend API Implementation](#part-2-backend-api-implementation)
-- [Part 3: Agent Configuration and Execution](#part-3-agent-configuration-and-execution)
+- [Part 3a: Agentic Tool Configuration - Portal UI](#part-3-agent-configuration-and-execution)
 
 ## Part 1: Configuring the Environment
 
@@ -95,7 +95,15 @@ curl -H "x-api-key: test-api-key-12345" http://<WEB_APP_NAME>/products
 curl -H "x-api-key: test-api-key-12345" http://<WEB_APP_NAME>/inventory/summary
 ```
 
-## Part 3: Agent Configuration and Execution
+## Part 3a: Agentic Tool Configuration - Portal UI
+
+### 3.1. OpenAPI Tool Setup
+
+1. In Azure AI Foundry's portal, choose `Build -> Tools -> Connect a tool" option.
+
+![OpenAPIToolStart_Screenshot](images/OpenAPI_Tool_Start.png)
+
+
 
 ### 1.2. Project Connection for API Key
 Create a project connection in Azure AI Foundry to store the API key:
