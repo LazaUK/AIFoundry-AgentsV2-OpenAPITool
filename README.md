@@ -109,12 +109,14 @@ curl -H "x-api-key: test-api-key-12345" http://<WEB_APP_NAME>/inventory/summary
    - **Credential - Key**: `x-api-key`
    - **Credential - Value**: `test-api-key-12345`
 
-![OpenAPIToolSchema_Screenshot](images/OpenAPI_Tool_Schema.png)
-
 3. Copy / paste your OpenAPI tool's schema. An example schema file, `product_inventory_openapi.json`, is provided.
 
+![OpenAPIToolSchema_Screenshot](images/OpenAPI_Tool_Schema.png)
 
+### 3.2. OpenAPI Schema Requirements
+Verify that your schema has the following sections set correctly.
 
+1. 
 
 
 
