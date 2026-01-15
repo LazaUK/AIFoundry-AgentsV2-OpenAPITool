@@ -57,7 +57,7 @@ Switch to `app` directory and run the following Azure CLI commands:
    az webapp config set --name <WEB_APP_NAME> --resource-group <AZURE_RESOURCE_GROUP> --startup-file "gunicorn -w 4 -k uvicorn.workers.UvicornWorker product_inventory_api:app"
 ```
 
-The backend API should become available at `http://<WEB_APP_NAME>` with interactive docs at `http://<WEB_APP_NAME>/docs`.
+The backend API should become available at `http://<WEB_APP_NAME>`, with interactive docs accessible at `http://<WEB_APP_NAME>/docs`.
 
 ![WebApp_Screenshot](images/Web_app.png)
 
@@ -67,23 +67,32 @@ The backend API should become available at `http://<WEB_APP_NAME>` with interact
 ### 2.2. API Endpoints
 The backend provides read-only access to mock product inventory:
 
-| Endpoint                 | Description |
-| ------------------------ | ---------------------------------------------------- |
-| `GET /products`          | List all products (filter by category, stock_status) |
-| `GET /products/{id}`     | Get specific product details                         |
-| `GET /inventory/summary` | Get inventory totals and statistics                  |
-| `GET /inventory/alerts`  | Get low stock and out of stock items                 |
+| Endpoint                         | Description                                          |
+| -------------------------------- | ---------------------------------------------------- |
+| `GET /products`                  | List all products (filter by category, stock_status) |
+| `GET /products/{product_id}`     | Get specific product details                         |
+| `GET /inventory/summary`         | Get inventory totals and statistics                  |
+| `GET /inventory/alerts`          | Get low stock and out of stock items                 |
 
 ### 2.3. Testing the API
-```bash
-# Health check (no auth)
-curl http://localhost:8000/
+You can test connectivity to backend APIs with the following curl commands:
 
-# List products (requires API key)
-curl -H "x-api-key: test-api-key-12345" http://localhost:8000/products
+1. Health check (no auth)
 
-# Get inventory summary
-curl -H "x-api-key: test-api-key-12345" http://localhost:8000/inventory/summary
+``` PowerShell
+curl http://<WEB_APP_NAME>/
+```
+
+2. List products (**requires API key**)
+
+``` PowerShell
+curl -H "x-api-key: test-api-key-12345" http://<WEB_APP_NAME>/products
+```
+
+3. Get inventory summary (**requires API key**)
+
+``` PowerShell
+curl -H "x-api-key: test-api-key-12345" http://<WEB_APP_NAME>/inventory/summary
 ```
 
 ## Part 3: Agent Configuration and Execution
