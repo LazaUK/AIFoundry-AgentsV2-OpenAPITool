@@ -4,7 +4,7 @@ This repo demonstrates how to use an *OpenAPI-specified API* as a tool for an AI
 The provided Jupyter notebook, `Agent_OpenAPITool.ipynb`, shows the complete end-to-end setup: from testing the backend API to creating and interacting with the agent.
 
 > [!Note]
-> The OpenAPI tool requires each operation to have an `operationId`. The API key is securely stored in an Azure project connection and passed automatically by the Agent Service.
+> The API key is securely stored in an Azure Ai Foundry's project connection and passed automatically by the Agent Service.
 
 ## 📑 Table of Contents:
 - [Part 1: Configuring the Environment](#part-1-configuring-the-environment)
@@ -16,30 +16,22 @@ The provided Jupyter notebook, `Agent_OpenAPITool.ipynb`, shows the complete end
 ### 1.1. Prerequisites
 You need:
 - An *Azure AI Foundry* project with a deployed model (e.g., gpt-4.1),
-- Python 3.10+ with FastAPI and uvicorn installed.
+- Authorisation to deploy backend API endpoint as a Web site to Azure App Services.
 
-### 1.2. Project Connection for API Key
-Create a project connection in Azure AI Foundry to store the API key:
-1. Go to **Management Center** → **Connected Resources** → **Add Connection**
-2. Select **Custom Keys** type
-3. Configure:
-   - **Name**: `product-inventory-api`
-   - **Key**: `x-api-key`
-   - **Value**: `test-api-key-12345`
-
-### 1.3. Environment Variables
+### 1.2. Environment Variables
 The Jupyter notebook uses the following variables:
 
-| Variable | Description |
-| --- | --- |
-| `AZURE_AI_PROJECT_ENDPOINT` | Your Azure AI Foundry project endpoint URL |
-| `AZURE_AI_MODEL_DEPLOYMENT_NAME` | Deployed model name (e.g., gpt-4o) |
-| `OPENAPI_CONNECTION_NAME` | Name of the project connection storing the API key |
+| Variable                         | Description                                        |
+| -------------------------------- | -------------------------------------------------- |
+| `AZURE_FOUNDRY_PROJECT_ENDPOINT` | Your Azure AI Foundry project endpoint URL         |
+| `AZURE_FOUNDRY_GPT_MODEL`        | Deployed model name (e.g., gpt-4o)                 |
+| `OPENAPI_CONNECTION_NAME`        | Name of the project connection storing the API key |
 
-### 1.4. Required Libraries
+### 1.3. Required Libraries
 Install the necessary Python packages:
-```bash
-pip install azure-ai-projects azure-identity jsonref requests fastapi uvicorn
+
+``` PowerShell
+pip install azure-ai-projects azure-identity jsonref requests
 ```
 
 ## Part 2: Backend API Implementation
@@ -76,6 +68,15 @@ curl -H "x-api-key: test-api-key-12345" http://localhost:8000/inventory/summary
 ```
 
 ## Part 3: Agent Configuration and Execution
+
+### 1.2. Project Connection for API Key
+Create a project connection in Azure AI Foundry to store the API key:
+1. Go to **Management Center** → **Connected Resources** → **Add Connection**
+2. Select **Custom Keys** type
+3. Configure:
+   - **Name**: `product-inventory-api`
+   - **Key**: `x-api-key`
+   - **Value**: `test-api-key-12345`
 
 ### 3.1. OpenAPI Specification
 The `product_inventory_openapi.json` file defines the API schema for the agent. Key requirements:
