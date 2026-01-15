@@ -1,6 +1,8 @@
 # Azure AI Foundry Agent Service: OpenAPI tool
 This repo demonstrates how to use an *OpenAPI-specified API* as a tool for an AI agent in the **Azure AI Foundry Agent Service**. The solution includes a mock FastAPI backend with API key authentication that the agent can query for product inventory data.
 
+![FoundrySolution_Screenshot](images/Foundry_Solution.png)
+
 The provided Jupyter notebook, `Agent_OpenAPITool.ipynb`, shows the complete end-to-end setup: from testing the backend API to creating and interacting with the agent.
 
 > [!Note]
@@ -59,7 +61,7 @@ Switch to `app` directory and run the following Azure CLI commands:
 
 The backend API should become available at `http://<WEB_APP_NAME>`, with interactive docs accessible at `http://<WEB_APP_NAME>/docs`.
 
-![WebApp_Screenshot](images/Web_app.png)
+![WebApp_Screenshot](images/Web_App.png)
 
 > [!IMPORTANT]
 > Backend API accepts the following API Key: `test-api-key-12345`
