@@ -1,8 +1,6 @@
 # Azure AI Foundry Agent Service: OpenAPI tool
 This repo demonstrates how to use an *OpenAPI-specified API* as a tool for an AI agent in the **Azure AI Foundry Agent Service**. The solution includes a mock FastAPI backend with API key authentication that the agent can query for product inventory data.
 
-![FoundrySolution_Screenshot](images/Foundry_Solution.png)
-
 The provided Jupyter notebook, `Agent_OpenAPITool.ipynb`, shows the complete end-to-end setup: from testing the backend API to creating and interacting with the agent.
 
 > [!Note]
@@ -39,27 +37,27 @@ pip install azure-ai-projects azure-identity jsonref requests
 ## Part 2: Backend API Implementation
 
 ### 2.1. Deploying an Azure Web app
-Switch to `app` directory and run the following Azure CLI commands:
+Switch to `app` directory and run the following Azure CLI commands.
 
-1. Login to Azure.
+1. Login to Azure:
 
 ``` PowerShell
 	az login
 ```
 
-2. Deploy backend API solution to an existing App Service Plan (so, that you can manage its cost).
+2. Deploy backend API solution to an existing App Service Plan (so, that you can manage its cost):
 
 ``` PowerShell
    az webapp up --name <WEB_APP_NAME> --resource-group <AZURE_RESOURCE_GROUP> --plan <AZURE_APP_SERVICE_PLAN> --location <AZURE_REGION> --runtime "PYTHON:3.11"
 ```
 
-3. Set startup command for FastAPI
+3. Set startup command for FastAPI:
 
 ``` PowerShell
    az webapp config set --name <WEB_APP_NAME> --resource-group <AZURE_RESOURCE_GROUP> --startup-file "gunicorn -w 4 -k uvicorn.workers.UvicornWorker product_inventory_api:app"
 ```
 
-The backend API should become available at `http://<WEB_APP_NAME>`, with interactive docs accessible at `http://<WEB_APP_NAME>/docs`.
+The backend API should become available at `http://<WEB_APP_NAME>`, with interactive docs accessible at `http://<WEB_APP_NAME>/docs` as shown below.
 
 ![WebApp_Screenshot](images/Web_App.png)
 
@@ -77,21 +75,21 @@ The backend provides read-only access to mock product inventory:
 | `GET /inventory/alerts`          | Get low stock and out of stock items                 |
 
 ### 2.3. Testing the API
-You can test connectivity to backend APIs with the following curl commands:
+You can test connectivity to backend APIs with the following curl commands.
 
-1. Health check (no auth)
+1. Health check (no auth):
 
 ``` PowerShell
 curl http://<WEB_APP_NAME>/
 ```
 
-2. List products (**requires API key**)
+2. List products (**requires API key**):
 
 ``` PowerShell
 curl -H "x-api-key: test-api-key-12345" http://<WEB_APP_NAME>/products
 ```
 
-3. Get inventory summary (**requires API key**)
+3. Get inventory summary (**requires API key**):
 
 ``` PowerShell
 curl -H "x-api-key: test-api-key-12345" http://<WEB_APP_NAME>/inventory/summary
@@ -146,11 +144,16 @@ agent = project_client.agents.create_version(
 ```
 
 ### 3.4. Sample Interactions
-Once created, you can ask the agent questions like:
-- *"What products do you have?"*
-- *"Show me the inventory summary."*
-- *"Are there any stock alerts?"*
-- *"Tell me about product PROD-001."*
-- *"What electronics do you have?"*
+Once created, you can use Agents Playground to ask the agent questions like:
 
-The agent will use the OpenAPI tool to call the appropriate endpoint and return the results.
+``` JSON
+- "What products do you have?"
+- "Show me the inventory summary."
+- "Are there any stock alerts?"
+- "Tell me about product PROD-001."
+- "What electronics do you have?"
+```
+
+The agent will use the OpenAPI tool to call the appropriate endpoint and return the results similar to this.
+
+![FoundrySolution_Screenshot](images/Foundry_Solution.png)
