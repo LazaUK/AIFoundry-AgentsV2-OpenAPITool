@@ -1,0 +1,209 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Product Inventory API",
+    "description": "Query product inventory data including stock levels and alerts.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://product-inventory-api.azurewebsites.net",
+      "description": "Azure App Service"
+    }
+  ],
+  "security": [
+    {
+      "apiKeyHeader": []
+    }
+  ],
+  "paths": {
+    "/products": {
+      "get": {
+        "operationId": "listProducts",
+        "summary": "List all products",
+        "description": "Retrieve all products with optional filtering by category or stock status.",
+        "parameters": [
+          {
+            "name": "category",
+            "in": "query",
+            "description": "Filter by category (electronics, clothing, food, books, home)",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": ["electronics", "clothing", "food", "books", "home"]
+            }
+          },
+          {
+            "name": "stock_status",
+            "in": "query",
+            "description": "Filter by stock status (in_stock, low_stock, out_of_stock)",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": ["in_stock", "low_stock", "out_of_stock"]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of products",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Product"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "API key missing"
+          },
+          "403": {
+            "description": "Invalid API key"
+          }
+        }
+      }
+    },
+    "/products/{product_id}": {
+      "get": {
+        "operationId": "getProduct",
+        "summary": "Get product by ID",
+        "description": "Retrieve detailed information about a specific product.",
+        "parameters": [
+          {
+            "name": "product_id",
+            "in": "path",
+            "description": "Product identifier (e.g., PROD-001)",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Product details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Product"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Product not found"
+          }
+        }
+      }
+    },
+    "/inventory/summary": {
+      "get": {
+        "operationId": "getInventorySummary",
+        "summary": "Get inventory summary",
+        "description": "Get overview of inventory including totals, values, and stock alert counts.",
+        "responses": {
+          "200": {
+            "description": "Inventory summary",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InventorySummary"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/inventory/alerts": {
+      "get": {
+        "operationId": "getStockAlerts",
+        "summary": "Get stock alerts",
+        "description": "Get products that are low on stock or out of stock.",
+        "responses": {
+          "200": {
+            "description": "Products needing attention",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Product"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "apiKeyHeader": {
+        "type": "apiKey",
+        "name": "x-api-key",
+        "in": "header"
+      }
+    },
+    "schemas": {
+      "Product": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "category": {
+            "type": "string",
+            "enum": ["electronics", "clothing", "food", "books", "home"]
+          },
+          "price": {
+            "type": "number"
+          },
+          "quantity": {
+            "type": "integer"
+          },
+          "stock_status": {
+            "type": "string",
+            "enum": ["in_stock", "low_stock", "out_of_stock"]
+          },
+          "description": {
+            "type": "string"
+          }
+        },
+        "required": ["id", "name", "category", "price", "quantity", "stock_status"]
+      },
+      "InventorySummary": {
+        "type": "object",
+        "properties": {
+          "total_products": {
+            "type": "integer"
+          },
+          "total_value": {
+            "type": "number"
+          },
+          "by_category": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "integer"
+            }
+          },
+          "low_stock_count": {
+            "type": "integer"
+          },
+          "out_of_stock_count": {
+            "type": "integer"
+          }
+        },
+        "required": ["total_products", "total_value", "by_category", "low_stock_count", "out_of_stock_count"]
+      }
+    }
+  }
+}
