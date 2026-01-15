@@ -45,7 +45,7 @@ Switch to `app` directory and run the following Azure CLI commands:
 	az login
 ```
 
-2. Deploy backedn API solution to an existing App Service Plan (so, that you can manage its cost).
+2. Deploy backend API solution to an existing App Service Plan (so, that you can manage its cost).
 
 ``` PowerShell
    az webapp up --name <WEB_APP_NAME> --resource-group <AZURE_RESOURCE_GROUP> --plan <AZURE_APP_SERVICE_PLAN> --location <AZURE_REGION> --runtime "PYTHON:3.11"
@@ -58,6 +58,8 @@ Switch to `app` directory and run the following Azure CLI commands:
 ```
 
 The backend API should become available at `http://<WEB_APP_NAME>` with interactive docs at `http://<WEB_APP_NAME>/docs`.
+
+![WebApp_Screenshot](images/Web_app.png)
 
 > [!IMPORTANT]
 > Backend API accepts the following API Key: `test-api-key-12345`
