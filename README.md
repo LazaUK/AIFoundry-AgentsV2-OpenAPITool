@@ -99,7 +99,7 @@ curl -H "x-api-key: test-api-key-12345" http://<WEB_APP_NAME>/inventory/summary
 
 ### 3.1. OpenAPI Tool Setup
 
-1. In Azure AI Foundry's portal, choose `Build -> Tools -> Connect a tool" option.
+1. In Azure AI Foundry's portal, choose "`Build -> Tools -> Connect a tool`" option. Then select "`Custom -> OpenAPI tool`":
 
 ![OpenAPIToolStart_Screenshot](images/OpenAPI_Tool_Start.png)
 
