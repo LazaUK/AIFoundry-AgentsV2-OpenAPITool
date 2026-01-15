@@ -15,7 +15,7 @@ The provided Jupyter notebook, `Agent_OpenAPITool.ipynb`, shows the complete end
 
 ### 1.1. Prerequisites
 You need:
-- An *Azure AI Foundry* project with a deployed model (e.g., gpt-4.1),
+- An *Azure AI Foundry* project with a deployed AI model (e.g., gpt-4.1),
 - Authorisation to deploy backend API endpoint as a Web site to Azure App Services.
 
 ### 1.2. Environment Variables
@@ -24,7 +24,7 @@ The Jupyter notebook uses the following variables:
 | Variable                         | Description                                        |
 | -------------------------------- | -------------------------------------------------- |
 | `AZURE_FOUNDRY_PROJECT_ENDPOINT` | Your Azure AI Foundry project endpoint URL         |
-| `AZURE_FOUNDRY_GPT_MODEL`        | Deployed model name (e.g., gpt-4o)                 |
+| `AZURE_FOUNDRY_GPT_MODEL`        | Deployed AI model name (e.g., gpt-4.1)             |
 | `OPENAPI_CONNECTION_NAME`        | Name of the project connection storing the API key |
 
 ### 1.3. Required Libraries
@@ -36,24 +36,41 @@ pip install azure-ai-projects azure-identity jsonref requests
 
 ## Part 2: Backend API Implementation
 
-### 2.1. Starting the Backend
-Run the FastAPI backend service:
-```bash
-uvicorn product_inventory_api:app --reload --host 0.0.0.0 --port 8000
-```
-The API will be available at `http://localhost:8000` with interactive docs at `http://localhost:8000/docs`.
+### 2.1. Deploying an Azure Web app
+Switch to `app` directory and run the following Azure CLI commands:
 
-**Test API Key**: `test-api-key-12345`
+1. Login to Azure.
+
+``` PowerShell
+	az login
+```
+
+2. Deploy backedn API solution to an existing App Service Plan (so, that you can manage its cost).
+
+``` PowerShell
+   az webapp up --name <WEB_APP_NAME> --resource-group <AZURE_RESOURCE_GROUP> --plan <AZURE_APP_SERVICE_PLAN> --location <AZURE_REGION> --runtime "PYTHON:3.11"
+```
+
+3. Set startup command for FastAPI
+
+``` PowerShell
+   az webapp config set --name <WEB_APP_NAME> --resource-group <AZURE_RESOURCE_GROUP> --startup-file "gunicorn -w 4 -k uvicorn.workers.UvicornWorker product_inventory_api:app"
+```
+
+The backend API should become available at `http://<WEB_APP_NAME>` with interactive docs at `http://<WEB_APP_NAME>/docs`.
+
+> [!IMPORTANT]
+> Backend API accepts the following API Key: `test-api-key-12345`
 
 ### 2.2. API Endpoints
 The backend provides read-only access to mock product inventory:
 
-| Endpoint | Description |
-| --- | --- |
-| `GET /products` | List all products (filter by category, stock_status) |
-| `GET /products/{id}` | Get specific product details |
-| `GET /inventory/summary` | Get inventory totals and statistics |
-| `GET /inventory/alerts` | Get low stock and out of stock items |
+| Endpoint                 | Description |
+| ------------------------ | ---------------------------------------------------- |
+| `GET /products`          | List all products (filter by category, stock_status) |
+| `GET /products/{id}`     | Get specific product details                         |
+| `GET /inventory/summary` | Get inventory totals and statistics                  |
+| `GET /inventory/alerts`  | Get low stock and out of stock items                 |
 
 ### 2.3. Testing the API
 ```bash
