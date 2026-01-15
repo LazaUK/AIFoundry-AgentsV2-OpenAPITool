@@ -95,32 +95,48 @@ curl -H "x-api-key: test-api-key-12345" http://<WEB_APP_NAME>/products
 curl -H "x-api-key: test-api-key-12345" http://<WEB_APP_NAME>/inventory/summary
 ```
 
-## Part 3a: Agentic Tool Configuration - Portal UI
+## Part 3: Agentic Tool Configuration - Foundry UI
 
 ### 3.1. OpenAPI Tool Setup
 
-1. In Azure AI Foundry's portal, choose "`Build -> Tools -> Connect a tool`" option. Then select "`Custom -> OpenAPI tool`":
+1. In Azure AI Foundry's portal, choose "`Build -> Tools -> Connect a tool`" option. Then select "`Custom -> OpenAPI tool -> Create`":
 
 ![OpenAPIToolStart_Screenshot](images/OpenAPI_Tool_Start.png)
 
+2. Fill in the form for an OpenAPi tool creation, e.g.
+   - **Name**: `product_inventory_tool`
+   - **Description**: `A tool to query product inventory data including stock levels and alerts`
+   - **Credential - Key**: `x-api-key`
+   - **Credential - Value**: `test-api-key-12345`
+
+![OpenAPIToolSchema_Screenshot](images/OpenAPI_Tool_Schema.png)
+
+3. Copy / paste your OpenAPI tool's schema. An example schema file, `product_inventory_openapi.json`, is provided.
 
 
-### 1.2. Project Connection for API Key
-Create a project connection in Azure AI Foundry to store the API key:
-1. Go to **Management Center** → **Connected Resources** → **Add Connection**
-2. Select **Custom Keys** type
-3. Configure:
-   - **Name**: `product-inventory-api`
-   - **Key**: `x-api-key`
-   - **Value**: `test-api-key-12345`
 
-### 3.1. OpenAPI Specification
-The `product_inventory_openapi.json` file defines the API schema for the agent. Key requirements:
-- Every operation has an `operationId` (e.g., `listProducts`, `getProduct`)
-- Security scheme defines API key authentication via `x-api-key` header
-- Descriptive summaries help the LLM choose the correct operation
 
-### 3.2. Defining the Tool
+
+
+
+### 3.3. Sample Interactions
+Once created, you can use Agents Playground to ask the agent questions like:
+
+``` JSON
+- "What products do you have?"
+- "Show me the inventory summary."
+- "Are there any stock alerts?"
+- "Tell me about product PROD-001."
+- "What electronics do you have?"
+```
+
+The agent will use the OpenAPI tool to call the appropriate endpoint and return the results similar to this.
+
+![FoundrySolution_Screenshot](images/Foundry_Solution.png)
+
+## Part 4: Agentic Tool Configuration - Foundry SDK
+
+### 4.2. Defining the Tool
 The OpenAPI tool is configured with project connection authentication:
 ```python
 openapi_tool = {
@@ -139,7 +155,7 @@ openapi_tool = {
 }
 ```
 
-### 3.3. Agent Creation
+### 4.3. Agent Creation
 ```python
 agent = project_client.agents.create_version(
     agent_name="InventoryAgent",
@@ -150,18 +166,3 @@ agent = project_client.agents.create_version(
     ),
 )
 ```
-
-### 3.4. Sample Interactions
-Once created, you can use Agents Playground to ask the agent questions like:
-
-``` JSON
-- "What products do you have?"
-- "Show me the inventory summary."
-- "Are there any stock alerts?"
-- "Tell me about product PROD-001."
-- "What electronics do you have?"
-```
-
-The agent will use the OpenAPI tool to call the appropriate endpoint and return the results similar to this.
-
-![FoundrySolution_Screenshot](images/Foundry_Solution.png)
