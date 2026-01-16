@@ -4,13 +4,13 @@ This repo demonstrates how to use an *OpenAPI-specified API* as a tool for an AI
 The provided Jupyter notebook, `Agent_OpenAPITool.ipynb`, shows the complete end-to-end setup: from testing the backend API to creating and interacting with the agent.
 
 > [!Note]
-> The API key is securely stored in an Azure Ai Foundry's project connection and passed automatically by the Agent Service.
+> The API key is securely stored in an Azure AI Foundry's project connection and passed automatically by the Agent Service.
 
 ## 📑 Table of Contents:
 - [Part 1: Configuring the Environment](#part-1-configuring-the-environment)
 - [Part 2: Backend API Implementation](#part-2-backend-api-implementation)
 - [Part 3: Agent and OpenAPI Tool Setup - Foundry UI](#part-3-agent-and-openapi-tool-setup---foundry-ui)
-- [Part 4: Agent and OpenAPI Tool Setup - Foundry SDK]()
+- [Part 4: Agent and OpenAPI Tool Setup - Foundry SDK](#part-4-agent-and-openapi-tool-setup---foundry-sdk)
 
 ## Part 1: Configuring the Environment
 
@@ -38,7 +38,7 @@ pip install azure-ai-projects azure-identity jsonref requests
 ## Part 2: Backend API Implementation
 
 ### 2.1. Deploying an Azure Web app
-Switch to `app` directory and run the following Azure CLI commands.
+Switch to the `app` directory and run the following Azure CLI commands.
 
 1. Login to Azure:
 
@@ -100,11 +100,11 @@ curl -H "x-api-key: test-api-key-12345" http://<WEB_APP_NAME>/inventory/summary
 
 ### 3.1. Foundry Agent Setup
 
-1. In Azure AI Foundry's portal, choose "`Build -> Agents -> Create agent`" option, enter your new agent's name, e.g. **Inventory-AgentV2**, and press "`Create`" button.
+1. In Azure AI Foundry's portal, choose the "`Build -> Agents -> Create agent`" option, enter your new agent's name, e.g. **Inventory-AgentV2**, and press the "`Create`" button.
 
 ![OpenAPIAgentStart_Screenshot](images/OpenAPI_Agent_Start.png)
 
-2. Choose target AI model deployment, e.g. **gpt-4.1** and system instructions similar to this:
+2. Choose target AI model deployment, e.g. **gpt-4.1**, and system instructions similar to this:
 
 ``` JSON
 You are an inventory assistant. Use the product_inventory tool to:
@@ -118,7 +118,7 @@ You are an inventory assistant. Use the product_inventory tool to:
 
 ### 3.2. OpenAPI Tool Setup
 
-1. In Agent's configuration, click "`Tools -> Add -> OpenAPI tool`" and enter required details, e.g.
+1. In agent's configuration, click "`Tools -> Add -> OpenAPI tool`" and enter required details, e.g.
    - **Name**: `product_inventory_tool`
    - **Description**: `A tool to query product inventory data including stock levels and alerts`
    - **Credential - Key**: `x-api-key`
@@ -126,12 +126,12 @@ You are an inventory assistant. Use the product_inventory tool to:
 
 ![OpenAPIAgentTool_Screenshot](images/OpenAPI_Agent_Tool.png)
 
-3. Copy / paste your OpenAPI tool's schema. An example schema file, `product_inventory_openapi.json`, is provided.
+2. Copy / paste your OpenAPI tool's schema. An example schema file, `product_inventory_openapi.json`, is provided.
 
 ### 3.3. OpenAPI Schema Requirements
 Verify that your schema has the following sections set correctly.
 
-1. You set correct URL in `servers`:
+1. You defined the right URL in `servers`:
 
 ``` JSON
   "servers": [
@@ -142,7 +142,7 @@ Verify that your schema has the following sections set correctly.
   ],
 ```
 
-2. You have `security` section referrring to your header array.
+2. You have a `security` section referring to your header array:
 
 ``` JSON
   "security": [
@@ -152,7 +152,7 @@ Verify that your schema has the following sections set correctly.
   ],
 ```
 
-3. You have `securitySchemes` section, with matching header array from `security` section and credential key defined in Section 3.2 above.
+3. You have a `securitySchemes` section, with a matching header array from the `security` section and the credential key defined in Section 3.2 above:
 
 ``` JSON
     "securitySchemes": {
@@ -181,8 +181,8 @@ The agent will use the OpenAPI tool to call the appropriate endpoint and return 
 
 ## Part 4: Agent and OpenAPI Tool Setup - Foundry SDK
 
-< [!TIP]
-< TO BE UPDATED SOON!
+> [!TIP]
+> TO BE UPDATED SOON!
 
 <!--
 ### 4.2. Defining the Tool
