@@ -118,11 +118,7 @@ You are an inventory assistant. Use the product_inventory tool to:
 
 ### 3.2. OpenAPI Tool Setup
 
-1. In Agent's configuration, clicl "`Tools -> Add -> OpenAPI tool`":
-
-![OpenAPIToolStart_Screenshot](images/OpenAPI_Tool_Start.png)
-
-2. Fill in the form for an OpenAPi tool creation, e.g.
+1. In Agent's configuration, click "`Tools -> Add -> OpenAPI tool`" and enter required details, e.g.
    - **Name**: `product_inventory_tool`
    - **Description**: `A tool to query product inventory data including stock levels and alerts`
    - **Credential - Key**: `x-api-key`
@@ -130,7 +126,7 @@ You are an inventory assistant. Use the product_inventory tool to:
 
 3. Copy / paste your OpenAPI tool's schema. An example schema file, `product_inventory_openapi.json`, is provided.
 
-![OpenAPIToolSchema_Screenshot](images/OpenAPI_Tool_Schema.png)
+![OpenAPIAgentTool_Screenshot](images/OpenAPI_Agent_Tool.png)
 
 ### 3.3. OpenAPI Schema Requirements
 Verify that your schema has the following sections set correctly.
