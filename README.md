@@ -9,7 +9,8 @@ The provided Jupyter notebook, `Agent_OpenAPITool.ipynb`, shows the complete end
 ## 📑 Table of Contents:
 - [Part 1: Configuring the Environment](#part-1-configuring-the-environment)
 - [Part 2: Backend API Implementation](#part-2-backend-api-implementation)
-- [Part 3a: Agentic Tool Configuration - Portal UI](#part-3-agent-configuration-and-execution)
+- [Part 3: Agent and OpenAPI Tool Setup - Foundry UI]()
+- [Part 4: Agent and OpenAPI Tool Setup - Foundry SDK]()
 
 ## Part 1: Configuring the Environment
 
@@ -95,7 +96,7 @@ curl -H "x-api-key: test-api-key-12345" http://<WEB_APP_NAME>/products
 curl -H "x-api-key: test-api-key-12345" http://<WEB_APP_NAME>/inventory/summary
 ```
 
-## Part 3: Agentic Tool Configuration - Foundry UI
+## Part 3: Agent and OpenAPI Tool Setup - Foundry UI
 
 ### 3.1. Foundry Agent Setup
 
@@ -152,8 +153,9 @@ The agent will use the OpenAPI tool to call the appropriate endpoint and return 
 
 ![FoundrySolution_Screenshot](images/Foundry_Solution.png)
 
-## Part 4: Agentic Tool Configuration - Foundry SDK
+## Part 4: Agent and OpenAPI Tool Setup - Foundry SDK
 
+<
 ### 4.2. Defining the Tool
 The OpenAPI tool is configured with project connection authentication:
 ```python
@@ -184,3 +186,4 @@ agent = project_client.agents.create_version(
     ),
 )
 ```
+>
