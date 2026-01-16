@@ -177,7 +177,7 @@ Once created, you can use Agents Playground to ask the agent questions like:
 
 The agent will use the OpenAPI tool to call the appropriate endpoint and return the results similar to this.
 
-![FoundrySolution_Screenshot](images/Foundry_Solution.png)
+![OpenAPIAgentResponse_Screenshot](images/OpenAPI_Agent_Response.png)
 
 ## Part 4: Agent and OpenAPI Tool Setup - Foundry SDK
 
