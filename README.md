@@ -9,7 +9,7 @@ The provided Jupyter notebook, `Agent_OpenAPITool.ipynb`, shows the complete end
 ## 📑 Table of Contents:
 - [Part 1: Configuring the Environment](#part-1-configuring-the-environment)
 - [Part 2: Backend API Implementation](#part-2-backend-api-implementation)
-- [Part 3: Agent and OpenAPI Tool Setup - Foundry UI]()
+- [Part 3: Agent and OpenAPI Tool Setup - Foundry UI](#part-3-agent-and-openapi-tool-setup---foundry-ui)
 - [Part 4: Agent and OpenAPI Tool Setup - Foundry SDK]()
 
 ## Part 1: Configuring the Environment
@@ -114,9 +114,11 @@ You are an inventory assistant. Use the product_inventory tool to:
 - Check for stock alerts
 ```
 
-### 3.1. OpenAPI Tool Setup
+![OpenAPIAgentPrompt_Screenshot](images/OpenAPI_Agent_Prompt.png)
 
-1. In Azure AI Foundry's portal, choose "`Build -> Tools -> Connect a tool`" option. Then select "`Custom -> OpenAPI tool -> Create`":
+### 3.2. OpenAPI Tool Setup
+
+1. In Agent's configuration, clicl "`Tools -> Add -> OpenAPI tool`":
 
 ![OpenAPIToolStart_Screenshot](images/OpenAPI_Tool_Start.png)
 
@@ -130,7 +132,7 @@ You are an inventory assistant. Use the product_inventory tool to:
 
 ![OpenAPIToolSchema_Screenshot](images/OpenAPI_Tool_Schema.png)
 
-### 3.2. OpenAPI Schema Requirements
+### 3.3. OpenAPI Schema Requirements
 Verify that your schema has the following sections set correctly.
 
 1. 
@@ -155,7 +157,10 @@ The agent will use the OpenAPI tool to call the appropriate endpoint and return 
 
 ## Part 4: Agent and OpenAPI Tool Setup - Foundry SDK
 
-<
+< [!TIP]
+< TO BE UPDATED SOON!
+
+<!--
 ### 4.2. Defining the Tool
 The OpenAPI tool is configured with project connection authentication:
 ```python
@@ -186,4 +191,4 @@ agent = project_client.agents.create_version(
     ),
 )
 ```
->
+-->
