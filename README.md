@@ -104,7 +104,7 @@ curl -H "x-api-key: test-api-key-12345" http://<WEB_APP_NAME>/inventory/summary
 
 ![OpenAPIAgentStart_Screenshot](images/OpenAPI_Agent_Start.png)
 
-2. Choose target AI model deployment, e.g. ***gpt-4.1** and system instructions similar to this:
+2. Choose target AI model deployment, e.g. **gpt-4.1** and system instructions similar to this:
 
 ``` JSON
 You are an inventory assistant. Use the product_inventory tool to:
@@ -124,19 +124,47 @@ You are an inventory assistant. Use the product_inventory tool to:
    - **Credential - Key**: `x-api-key`
    - **Credential - Value**: `test-api-key-12345`
 
-3. Copy / paste your OpenAPI tool's schema. An example schema file, `product_inventory_openapi.json`, is provided.
-
 ![OpenAPIAgentTool_Screenshot](images/OpenAPI_Agent_Tool.png)
+
+3. Copy / paste your OpenAPI tool's schema. An example schema file, `product_inventory_openapi.json`, is provided.
 
 ### 3.3. OpenAPI Schema Requirements
 Verify that your schema has the following sections set correctly.
 
-1. 
+1. You set correct URL in `servers`:
 
+``` JSON
+  "servers": [
+    {
+      "url": "https://product-inventory-api.azurewebsites.net",
+      "description": "Azure App Service"
+    }
+  ],
+```
 
+2. You have `security` section referrring to your header array.
 
+``` JSON
+  "security": [
+    {
+      "apiKeyHeader": []
+    }
+  ],
+```
 
-### 3.3. Sample Interactions
+3. You have `securitySchemes` section, with matching header array from `security` section and credential key defined in Section 3.2 above.
+
+``` JSON
+    "securitySchemes": {
+      "apiKeyHeader": {
+        "type": "apiKey",
+        "name": "x-api-key",
+        "in": "header"
+      }
+    },
+```
+
+### 3.4. Sample Interactions
 Once created, you can use Agents Playground to ask the agent questions like:
 
 ``` JSON
