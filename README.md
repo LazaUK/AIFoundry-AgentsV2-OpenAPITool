@@ -100,7 +100,7 @@ curl -H "x-api-key: test-api-key-12345" http://<WEB_APP_NAME>/inventory/summary
 
 ### 3.1. Foundry Agent Setup
 
-1. In Azure AI Foundry's portal, choose the "`Build -> Agents -> Create agent`" option, enter your new agent's name, e.g. **Inventory-AgentV2**, and press the "`Create`" button.
+1. In Azure AI Foundry's portal, choose the `"Build -> Agents -> Create agent"` option, enter your new agent's name, e.g. **Inventory-AgentV2**, and press the `"Create"` button.
 
 ![OpenAPIAgentStart_Screenshot](images/OpenAPI_Agent_Start.png)
 
@@ -118,7 +118,7 @@ You are an inventory assistant. Use the product_inventory tool to:
 
 ### 3.2. OpenAPI Tool Setup
 
-1. In agent's configuration, click "`Tools -> Add -> OpenAPI tool`" and enter required details, e.g.
+1. In agent's configuration, click `"Tools -> Add -> OpenAPI tool"` and enter required details, e.g.
    - **Name**: `product_inventory_tool`
    - **Description**: `A tool to query product inventory data including stock levels and alerts`
    - **Credential - Key**: `x-api-key`
